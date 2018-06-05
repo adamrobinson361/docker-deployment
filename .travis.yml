@@ -5,5 +5,3 @@ services:
   
 before_install:
   - docker build -t app .
-  - docker run -d -p 8787:8787 app
-  - docker ps -a
