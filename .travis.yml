@@ -9,4 +9,8 @@ before_install:
   - docker build -t app .
   - docker run -d -p 8787:8787 app
   - docker ps -a
-  - docker run app /bin/sh -c "echo $PWD"
+  - docker run app Rscript -e SHINYAPPS_SECRET = Secret -e SHINYAPPS_TOKEN = Token
+  - docker run app Rscript -e "install.packages('rsconnect')"
+  - docker run app Rscript -e "rsconnect::setAccountInfo(name='adamrobinson361', token=Sys.getenv('SHINYAPPS_TOKEN'), secret=Sys.getenv('SHINYAPPS_SECRET'))"
+  - docker run app Rscript -e "rsconnect::deployApp()"
+
