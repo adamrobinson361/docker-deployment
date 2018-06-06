@@ -11,4 +11,5 @@ before_install:
   - docker ps -a
   - docker exec -it deployment_container Rscript -e "install.packages('rsconnect')"
   - docker exec -it deployment_container Rscript -e "rsconnect::setAccountInfo(name='adamrobinson361', token=Sys.getenv('TRAVIS_TOKEN'), secret=Sys.getenv('TRAVIS_SECRET'))"
-  - docker exec -it deployment_container Rscript -e "rsconnect::deployApp(appDir = 'project', appName = 'test')"
+  - docker exec -it deployment_container Rscript -e "list.files()"
+  - docker exec -it deployment_container Rscript -e "rsconnect::deployApp(appDir = '.', appName = 'test')"
