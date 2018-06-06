@@ -9,7 +9,8 @@ before_install:
   - docker build -t app .
   - docker run -d -p 8787:8787 app
   - docker ps -a
+  - docker run app -e TRAVIS_SECRET -e TRAVIS_TOKEN
   - docker run app Rscript -e "install.packages('rsconnect')"
-  - docker run app Rscript -e "rsconnect::setAccountInfo(name='adamrobinson361', token=Sys.getenv('Token'), secret=Sys.getenv('Secret'))"
+  - docker run app Rscript -e "rsconnect::setAccountInfo(name='adamrobinson361', token=Sys.getenv('TRAVIS_TOKEN'), secret=Sys.getenv('TRAVIS_SECRET'))"
   - docker run app Rscript -e "rsconnect::deployApp()"
 
